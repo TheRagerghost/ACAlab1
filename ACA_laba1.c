@@ -155,7 +155,10 @@ node* AddTree(node *root, struct pairVID _art) {
 
 unsigned int Search_tree(node *root, unsigned int search) {
     _compare++;
-    if (search == root->key.id) {
+    if (root != NULL){
+        printf("%d hasn't been found.\n", search);
+        return 0;
+    } else if (search == root->key.id) {
         printf("%d has been found.\n", root->key.id);
         return root->key.id;
     } else if (search < root->key.id)
@@ -220,30 +223,38 @@ int Search_interpolation (unsigned int search, struct pairVID* _arr, int low, in
             }
         }
     }
-    
-    printf("\n%d has position %d", search,index);
+    if (index > 0)
+        printf("\n%d has position %d", search,index);
+    else
+        printf("\n%d hasn't been found.", search);
     printf("\nTotal compares count: %d\n", --comparisons);
     return index;
 }
 
-int Search_binary(int a, struct pairVID* _arr, int n) {
+int Search_binary(int search, struct pairVID* _arr, int n) {
+    char _isFound = 0;
     int low, high, mid;
     low = 0;
     high = n - 1;
     while (low <= high) {
         mid = (low + high) / 2;
-        if (a < _arr[mid].id) {
+        if (search < _arr[mid].id) {
             _compare++;
             high = mid - 1;
-        } else if (a > _arr[mid].id) {
+        } else if (search > _arr[mid].id) {
             low = mid + 1;
             _compare++;
         } else {
             printf("%d has position %d.\n", _arr[mid].id , mid);
+            _isFound = 1;
             return mid;
         }
         _move++;
     }
+    
+    if (_isFound == 0)
+        printf("\n%d hasn't been found.\n", search);
+    
     return -1;
 }
 
