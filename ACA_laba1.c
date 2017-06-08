@@ -253,7 +253,7 @@ int Search_binary(int search, struct pairVID* _arr, int n) {
     }
     
     if (_isFound == 0)
-        printf("\n%d hasn't been found.\n", search);
+        printf("%d hasn't been found.\n", search);
     
     return -1;
 }
